@@ -2,6 +2,10 @@
   <div>
     <p>请选择你要购买的书籍</p>
     <ul>
+      <li v-for="(item, index) in arr" :key="index">{{item.name}}
+      <button @click="buy(index)">买书</button>
+      </li>
+      
     </ul>
     <table border="1" width="500" cellspacing="0">
       <tr>
@@ -11,8 +15,15 @@
         <th>数量</th>
         <th>合计</th>
       </tr>
+      <tr v-for="(item, index) in arr" :key="index">
+        <th>{{ index + 1 }}</th>
+        <th>{{item.name}}</th>
+        <th>{{item.price}}</th>
+        <th>{{item.count}}</th>
+        <th>{{item.price * item.count}}</th>
+      </tr>
     </table>
-    <p>总价格为: </p>
+    <p></p>
   </div>
 </template>
 
@@ -43,6 +54,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    buy(index) {
+      this.arr[index].count++
+    }
   }
 };
 </script>
